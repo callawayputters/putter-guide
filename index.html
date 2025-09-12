@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Putter Selection Guide</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 18px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        .performance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .performance-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 12px;
+        }
+        
+        .front-cg { border-left: 4px solid #3b82f6; }
+        .mid-cg { border-left: 4px solid #f59e0b; }
+        .back-cg { border-left: 4px solid #ef4444; }
+        .high-moi { background-color: #f0f9ff; }
+        
+        .color-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .putter-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        
+        .putter-table th,
+        .putter-table td {
+            border: 1px solid #ddd;
+            padding: 6px 4px;
+            text-align: left;
+        }
+        
+        .putter-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .putter-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .zone-high-stability { background-color: #dcfce7; }
+        .zone-balanced { background-color: #dbeafe; }
+        .zone-feel { background-color: #fef3c7; }
+        
+        .quick-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .filter-btn {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 15px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        
+        .filter-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        .note {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 12px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .warning-note {
+            background-color: #fef7cd;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        @media (max-width: 480px) {
+            .performance-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .putter-table {
+                font-size: 10px;
+            }
+            
+            .putter-table th,
+            .putter-table td {
+                padding: 4px 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏌️ Putter Selection Guide</h1>
+        <p style="margin: 5px 0 0 0; opacity: 0.9;">Performance-Based Selection Tool</p>
+    </div>
+
+    <div class="section">
+        <h2>🎯 Performance Zones</h2>
+        <div class="performance-grid">
+            <div class="performance-card front-cg">
+                <strong>Front CG Zone</strong><br>
+                ≤ 0.699 depth<br>
+                • Forward roll<br>
+                • Faster face rotation<br>
+                • Better for arc putters
+            </div>
+            <div class="performance-card mid-cg">
+                <strong>Mid CG Zone</strong><br>
+                0.700 - 1.050 depth<br>
+                • Balanced performance<br>
+                • Moderate face rotation<br>
+                • Versatile feel
+            </div>
+            <div class="performance-card back-cg">
+                <strong>Back CG Zone</strong><br>
+                ≥ 1.051 depth<br>
+                • Maximum stability<br>
+                • Slower face rotation<br>
+                • More forgiving
+            </div>
+            <div class="performance-card high-moi">
+                <strong>MOI Categories</strong><br>
+                • Mid: 3600-4000<br>
+                • High: 4000-5000<br>
+                • Highest: 5000-6000<br>
+                • Max: 6000+
+            </div>
+        </div>
+        
+        <div class="note warning-note">
+            <strong>⚠️ Face Rotation Key:</strong> Front CG delivers faster face rotation through impact, while back CG delivers slower face rotation or more right at impact.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔍 Quick Recommendations</h2>
+        
+        <div style="margin-bottom: 15px;">
+            <h3 style="color: #059669; margin-bottom: 8px;">Maximum Forgiveness</h3>
+            <div style="font-size: 12px; background: #ecfdf5; padding: 10px; border-radius: 5px;">
+                High MOI (5000+) + Back CG (1.05+)<br>
+                <strong>Best for:</strong> Inconsistent ball strikers, beginners<br>
+                <strong>Top Models:</strong> Jailbird Broomstick CS (MOI: 6784), 2-Ball Jailbird (MOI: 5321), Jailbird T (MOI: 5763)
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <h3 style="color: #0369a1; margin-bottom: 8px;">Balanced Performance</h3>
+            <div style="font-size: 12px; background: #eff6ff; padding: 10px; border-radius: 5px;">
+                Mid MOI (4000-5000) + Mid CG (0.7-1.05)<br>
+                <strong>Best for:</strong> Consistent players wanting stability with feel<br>
+                <strong>Top Models:</strong> #7 S (MOI: 4500), Rossie V T (MOI: 4495), Jailbird Mini S (MOI: 4847)
+            </div>
+        </div>
+        
+        <div>
+            <h3 style="color: #dc2626; margin-bottom: 8px;">Traditional Feel</h3>
+            <div style="font-size: 12px; background: #fef2f2; padding: 10px; border-radius: 5px;">
+                Front CG + Blade Design<br>
+                <strong>Best for:</strong> Advanced players, arc putting stroke<br>
+                <strong>Top Models:</strong> ONE T (MOI: 4468), #2 CH (MOI: 4724), Double Wide (MOI: 4935)
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📊 Complete Putter Database</h2>
+        
+        <div class="quick-filter">
+            <button class="filter-btn active" onclick="filterTable('all')">All</button>
+            <button class="filter-btn" onclick="filterTable('blade')">Blades</button>
+            <button class="filter-btn" onclick="filterTable('mallet')">Mallets</button>
+            <button class="filter-btn" onclick="filterTable('face-balanced')">Face Balanced</button>
+            <button class="filter-btn" onclick="filterTable('high-moi')">High MOI</button>
+            <button class="filter-btn" onclick="filterTable('left-handed')">LH Available</button>
+        </div>
+        
+        <div style="overflow-x: auto;">
+            <table class="putter-table" id="putterTable">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Type</th>
+                        <th>CG</th>
+                        <th>MOI</th>
+                        <th>Toe Hang</th>
+                        <th>Hosel</th>
+                        <th>LH</th>
+                    </tr>
+                </thead>
+                <tbody id="putterTableBody">
+                    <tr data-type="blade" data-toehang="mid" data-moi="4468" data-lh="no" class="zone-feel">
+                        <td><strong>ONE T</strong></td>
+                        <td>Blade</td>
+                        <td>0.434</td>
+                        <td>4468</td>
+                        <td>Mid (48°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4542" data-lh="no" class="zone-feel">
+                        <td><strong>Two T</strong></td>
+                        <td>Blade</td>
+                        <td>0.437</td>
+                        <td>4542</td>
+                        <td>Mid (43°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4542" data-lh="yes" class="zone-feel">
+                        <td><strong>TWO T</strong></td>
+                        <td>Blade</td>
+                        <td>0.437</td>
+                        <td>4542</td>
+                        <td>Mid (45°)</td>
+                        <td>CH</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4724" data-lh="no" class="zone-feel">
+                        <td><strong>#2 CH</strong></td>
+                        <td>Blade</td>
+                        <td>0.442</td>
+                        <td>4724</td>
+                        <td>Mid (44°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4635" data-lh="yes" class="zone-feel">
+                        <td><strong>#1</strong></td>
+                        <td>Blade</td>
+                        <td>0.442</td>
+                        <td>4635</td>
+                        <td>Mid (45-47°)</td>
+                        <td>CH</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4776" data-lh="yes" class="zone-feel">
+                        <td><strong>One Wide T</strong></td>
+                        <td>Blade</td>
+                        <td>0.539</td>
+                        <td>4776</td>
+                        <td>Mid (35°)</td>
+                        <td>CH</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="mid" data-moi="5219" data-lh="no" class="zone-balanced">
+                        <td><strong>One Wide T Cruiser</strong></td>
+                        <td>Blade</td>
+                        <td>0.552</td>
+                        <td>5219</td>
+                        <td>Mid (35°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4898" data-lh="no" class="zone-balanced">
+                        <td><strong>Double Wide CH</strong></td>
+                        <td>Blade</td>
+                        <td>0.617</td>
+                        <td>4898</td>
+                        <td>Mid (37°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="mid" data-moi="5141" data-lh="no" class="zone-balanced">
+                        <td><strong>Double Wide Cruiser CH</strong></td>
+                        <td>Blade</td>
+                        <td>0.625</td>
+                        <td>5141</td>
+                        <td>Mid (37°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="minimal" data-moi="4935" data-lh="no" class="zone-balanced">
+                        <td><strong>Double Wide</strong></td>
+                        <td>Blade</td>
+                        <td>0.646</td>
+                        <td>4935</td>
+                        <td>Minimal (20°)</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="s2s" data-moi="6187" data-lh="no" class="zone-high-stability">
+                        <td><strong>Double Wide Cruiser</strong></td>
+                        <td>Blade</td>
+                        <td>0.669</td>
+                        <td>6187</td>
+                        <td>S2S (90°)</td>
+                        <td>CS</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="blade" data-toehang="s2s" data-moi="6108" data-lh="no" class="zone-high-stability">
+                        <td><strong>Double Wide CS</strong></td>
+                        <td>Blade</td>
+                        <td>0.674</td>
+                        <td>6108</td>
+                        <td>S2S (90°)</td>
+                        <td>CS</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4113" data-lh="no" class="zone-balanced">
+                        <td><strong>Three T</strong></td>
+                        <td>Mallet</td>
+                        <td>0.698</td>
+                        <td>4113</td>
+                        <td>Mid (43-44°)</td>
+                        <td>S</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="3843" data-lh="no" class="zone-balanced">
+                        <td><strong>Seven T CH</strong></td>
+                        <td>Mallet</td>
+                        <td>0.700</td>
+                        <td>3843</td>
+                        <td>Minimal (21-22°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3716" data-lh="no" class="zone-balanced">
+                        <td><strong>SIX T</strong></td>
+                        <td>Mallet</td>
+                        <td>0.732</td>
+                        <td>3716</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3992" data-lh="yes" class="zone-balanced">
+                        <td><strong>Seven T DB</strong></td>
+                        <td>Mallet</td>
+                        <td>0.801</td>
+                        <td>3992</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="3941" data-lh="no" class="zone-balanced">
+                        <td><strong>ROSSIE S</strong></td>
+                        <td>Mallet</td>
+                        <td>0.825</td>
+                        <td>3941</td>
+                        <td>Mid (46°)</td>
+                        <td>S</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4495" data-lh="no" class="zone-balanced">
+                        <td><strong>Rossie V T</strong></td>
+                        <td>Mallet</td>
+                        <td>0.861</td>
+                        <td>4495</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3635" data-lh="no" class="zone-balanced">
+                        <td><strong>Rossie DB</strong></td>
+                        <td>Mallet</td>
+                        <td>0.871</td>
+                        <td>3635</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="4438" data-lh="no" class="zone-balanced">
+                        <td><strong>#7 CH</strong></td>
+                        <td>Mallet</td>
+                        <td>0.894</td>
+                        <td>4438</td>
+                        <td>Minimal (10°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4500" data-lh="yes" class="zone-balanced">
+                        <td><strong>#7 S</strong></td>
+                        <td>Mallet</td>
+                        <td>0.907</td>
+                        <td>4500</td>
+                        <td>Mid (40°)</td>
+                        <td>S</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4417" data-lh="no" class="zone-balanced">
+                        <td><strong>#7 DB</strong></td>
+                        <td>Mallet</td>
+                        <td>0.928</td>
+                        <td>4417</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5125" data-lh="no" class="zone-high-stability">
+                        <td><strong>#7 Cruiser DB</strong></td>
+                        <td>Mallet</td>
+                        <td>0.967</td>
+                        <td>5125</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5101" data-lh="no" class="zone-high-stability">
+                        <td><strong>#7 Armlock DB</strong></td>
+                        <td>Mallet</td>
+                        <td>0.978</td>
+                        <td>5101</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="4640" data-lh="no" class="zone-balanced">
+                        <td><strong>Jailbird Mini CH</strong></td>
+                        <td>Mallet</td>
+                        <td>0.978</td>
+                        <td>4640</td>
+                        <td>Minimal (24°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="4780" data-lh="no" class="zone-balanced">
+                        <td><strong>#7 CS</strong></td>
+                        <td>Mallet</td>
+                        <td>0.978</td>
+                        <td>4780</td>
+                        <td>S2S (90°)</td>
+                        <td>CS</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="4809" data-lh="no" class="zone-balanced">
+                        <td><strong>Jailbird Mini Versa 90</strong></td>
+                        <td>Mallet</td>
+                        <td>0.982</td>
+                        <td>4809</td>
+                        <td>Minimal (24°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4780" data-lh="no" class="zone-balanced">
+                        <td><strong>Jailbird Mini T</strong></td>
+                        <td>Mallet</td>
+                        <td>0.985</td>
+                        <td>4780</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="5008" data-lh="no" class="zone-high-stability">
+                        <td><strong>#7 Cruiser CS</strong></td>
+                        <td>Mallet</td>
+                        <td>0.988</td>
+                        <td>5008</td>
+                        <td>S2S (90°)</td>
+                        <td>CS</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4847" data-lh="no" class="zone-balanced">
+                        <td><strong>Jailbird Mini S</strong></td>
+                        <td>Mallet</td>
+                        <td>0.989</td>
+                        <td>4847</td>
+                        <td>Mid (32°)</td>
+                        <td>S</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5648" data-lh="no" class="zone-high-stability">
+                        <td><strong>#7 Broomstick CS</strong></td>
+                        <td>Mallet</td>
+                        <td>0.997</td>
+                        <td>5648</td>
+                        <td>Face Balanced</td>
+                        <td>CS</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5412" data-lh="yes" class="zone-high-stability">
+                        <td><strong>Jailbird Versa 90</strong></td>
+                        <td>Mallet</td>
+                        <td>1.009</td>
+                        <td>5412</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4735" data-lh="no" class="zone-balanced">
+                        <td><strong>Jailbird Mini Versa 90 DB</strong></td>
+                        <td>Mallet</td>
+                        <td>1.010</td>
+                        <td>4735</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4739" data-lh="no" class="zone-balanced">
+                        <td><strong>Jailbird Mini DB</strong></td>
+                        <td>Mallet</td>
+                        <td>1.011</td>
+                        <td>4739</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5763" data-lh="no" class="zone-high-stability">
+                        <td><strong>Jailbird T</strong></td>
+                        <td>Mallet</td>
+                        <td>1.018</td>
+                        <td>5763</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="5266" data-lh="no" class="zone-high-stability">
+                        <td><strong>Jailbird Cruiser CS</strong></td>
+                        <td>Mallet</td>
+                        <td>1.039</td>
+                        <td>5266</td>
+                        <td>S2S (90°)</td>
+                        <td>CS</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="5028" data-lh="no" class="zone-high-stability">
+                        <td><strong>Jailbird CS</strong></td>
+                        <td>Mallet</td>
+                        <td>1.042</td>
+                        <td>5028</td>
+                        <td>S2S (90°)</td>
+                        <td>CS</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3933" data-lh="yes" class="zone-high-stability">
+                        <td><strong>2-Ball T</strong></td>
+                        <td>Mallet</td>
+                        <td>1.045</td>
+                        <td>3933</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="4394" data-lh="no" class="zone-high-stability">
+                        <td><strong>2-Ball CH</strong></td>
+                        <td>Mallet</td>
+                        <td>1.064</td>
+                        <td>4394</td>
+                        <td>Minimal (16°)</td>
+                        <td>CH</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4937" data-lh="yes" class="zone-high-stability">
+                        <td><strong>EIGHT T S</strong></td>
+                        <td>Mallet</td>
+                        <td>1.078</td>
+                        <td>4937</td>
+                        <td>Mid (36°)</td>
+                        <td>S</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="6784" data-lh="no" class="zone-high-stability">
+                        <td><strong>Jailbird Broomstick CS</strong></td>
+                        <td>Mallet</td>
+                        <td>1.141</td>
+                        <td>6784</td>
+                        <td>S2S (90°)</td>
+                        <td>CS</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4253" data-lh="yes" class="zone-high-stability">
+                        <td><strong>2-Ball DB</strong></td>
+                        <td>Mallet</td>
+                        <td>1.148</td>
+                        <td>4253</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="5011" data-lh="yes" class="zone-high-stability">
+                        <td><strong>24</strong></td>
+                        <td>Mallet</td>
+                        <td>1.222</td>
+                        <td>5011</td>
+                        <td>Mid (33°)</td>
+                        <td>S</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4689" data-lh="no" class="zone-high-stability">
+                        <td><strong>Wing Back</strong></td>
+                        <td>Mallet</td>
+                        <td>1.237</td>
+                        <td>4689</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5321" data-lh="yes" class="zone-high-stability">
+                        <td><strong>2-Ball Jailbird</strong></td>
+                        <td>Mallet</td>
+                        <td>1.250</td>
+                        <td>5321</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4377" data-lh="yes" class="zone-high-stability">
+                        <td><strong>2-Ball Jailbird Mini</strong></td>
+                        <td>Mallet</td>
+                        <td>1.252</td>
+                        <td>4377</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4584" data-lh="no" class="zone-high-stability">
+                        <td><strong>ELEVEN T DB</strong></td>
+                        <td>Mallet</td>
+                        <td>1.314</td>
+                        <td>4584</td>
+                        <td>Face Balanced</td>
+                        <td>DB</td>
+                        <td>❌</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔧 Toe Hang Guide</h2>
+        <div class="color-legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #10B981;"></div>
+                <span>Face Balanced (0°)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #F59E0B;"></div>
+                <span>Minimal (10-25°)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #EF4444;"></div>
+                <span>Mid (30-48°)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #8B5CF6;"></div>
+                <span>S2S (90°)</span>
+            </div>
+        </div>
+        
+        <div class="note">
+            <strong>Toe Hang Matching:</strong><br>
+            • <strong>Face Balanced:</strong> Straight-back, straight-through putting stroke<br>
+            • <strong>Minimal:</strong> Slight arc in putting stroke<br>
+            • <strong>Mid:</strong> Moderate arc in putting stroke<br>
+            • <strong>S2S (Shaft-to-Shaft):</strong> Strong arc in putting stroke
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📱 How to Use This Guide</h2>
+        <ol style="margin: 0; padding-left: 20px; font-size: 13px;">
+            <li><strong>Identify your stroke type</strong> - Straight vs. arc putting motion</li>
+            <li><strong>Determine forgiveness needs</strong> - Consistent ball striker vs. needs help</li>
+            <li><strong>Use the performance zones</strong> - Front CG for feel, Back CG for stability</li>
+            <li><strong>Filter the table</strong> - Use buttons above to narrow choices</li>
+            <li><strong>Check left-handed availability</strong> - Look for ✅ in LH column</li>
+        </ol>
+    </div>
+
+    <script>
+        function filterTable(filter, buttonElement) {
+            const table = document.getElementById('putterTableBody');
+            const rows = table.getElementsByTagName('tr');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+            
+            // Filter rows
+            for (let row of rows) {
+                let show = true;
+                
+                switch(filter) {
+                    case 'blade':
+                        show = row.dataset.type === 'blade';
+                        break;
+                    case 'mallet':
+                        show = row.dataset.type === 'mallet';
+                        break;
+                    case 'face-balanced':
+                        show = row.dataset.toehang === 'face-balanced';
+                        break;
+                    case 'high-moi':
+                        show = parseInt(row.dataset.moi) >= 5000;
+                        break;
+                    case 'left-handed':
+                        show = row.dataset.lh === 'yes';
+                        break;
+                    case 'all':
+                    default:
+                        show = true;
+                        break;
+                }
+                
+                row.style.display = show ? '' : 'none';
+            }
+        }
+        
+        // Add mobile-friendly touch events
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(btn => {
+                // Add touch events for better mobile interaction
+                btn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(0.95)';
+                }, { passive: false });
+                
+                btn.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'scale(1)';
+                    
+                    // Trigger the filter function
+                    const filter = this.textContent.toLowerCase().replace(' ', '-').replace('lh available', 'left-handed').replace('face balanced', 'face-balanced').replace('high moi', 'high-moi');
+                    filterTable(filter === 'all' ? 'all' : filter === 'blades' ? 'blade' : filter === 'mallets' ? 'mallet' : filter, this);
+                }, { passive: false });
+                
+                // Also keep click events for desktop/fallback
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const filter = this.textContent.toLowerCase().replace(' ', '-').replace('lh available', 'left-handed').replace('face balanced', 'face-balanced').replace('high moi', 'high-moi');
+                    filterTable(filter === 'all' ? 'all' : filter === 'blades' ? 'blade' : filter === 'mallets' ? 'mallet' : filter, this);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
