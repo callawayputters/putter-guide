@@ -1,4 +1,113 @@
-<!DOCTYPE html>
+  <script>
+        function applyFilter(filterType) {
+            var buttons = document.querySelectorAll('.filter-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].className = 'filter-btn';
+            }
+            event.target.className = 'filter-btn btn-active';
+            
+            // Filter table rows
+            var rows = document.querySelectorAll('#putterTableBody tr');
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var show = false;
+                
+                switch(filterType) {
+                    case 'all':
+                        show = true;
+                        break;
+                    case 'blade':
+                        show = row.getAttribute('data-type') === 'blade';
+                        break;
+                    case 'mallet':
+                        show = row.getAttribute('data-type') === 'mallet';
+                        break;
+                    case 'face-balanced':
+                        show = row.getAttribute('data-toehang') === 'face-balanced';
+                        break;
+                    case 'high-moi':
+                        show = parseInt(row.getAttribute('data-moi')) >= 5000;
+                        break;
+                    case 'left-handed':
+                        show = row.getAttribute('data-lh') === 'yes';
+                        break;
+                }
+                
+                row.style.display = show ? '' : 'none';
+            }
+            
+            // Filter chart points
+            var chartPoints = document.querySelectorAll('.chart-point');
+            for (var i = 0; i < chartPoints.length; i++) {
+                var point = chartPoints[i];
+                var show = false;
+                
+                switch(filterType) {
+                    case 'all':
+                        show = true;
+                        break;
+                    case 'blade':
+                        show = point.getAttribute('data-type') === 'blade';
+                        break;
+                    case 'mallet':
+                        show = point.getAttribute('data-type') === 'mallet';
+                        break;
+                    case 'face-balanced':
+                        show = point.getAttribute('data-hang') && point.getAttribute('data-hang').toLowerCase().indexOf('face balanced') !== -1;
+                        break;
+                    case 'high-moi':
+                        show = parseInt(point.getAttribute('data-moi')) >= 5000;
+                        break;
+                    case 'left-handed':
+                        show = point.getAttribute('data-lh') === 'Yes';
+                        break;
+                }
+                
+                if (show) {
+                    point.style.opacity = '0.8';
+                } else {
+                    point.style.opacity = '0.1';
+                }
+            }
+        }
+        
+        // Add chart tooltip functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            var chartPoints = document.querySelectorAll('.chart-point');
+            var tooltip = document.getElementById('chartTooltip');
+            
+            for (var i = 0; i < chartPoints.length; i++) {
+                chartPoints[i].addEventListener('click', function(e) {
+                    var name = this.getAttribute('data-name');
+                    var type = this.getAttribute('data-type');
+                    var cg = this.getAttribute('data-cg');
+                    var moi = this.getAttribute('data-moi');
+                    var hang = this.getAttribute('data-hang');
+                    var hosel = this.getAttribute('data-hosel');
+                    var lh = this.getAttribute('data-lh');
+                    
+                    tooltip.innerHTML = 
+                        '<div style="font-weight: bold; margin-bottom: 4px;">' + name + '</div>' +
+                        '<div>Type: ' + type + '</div>' +
+                        '<div>CG Depth: ' + cg + '</div>' +
+                        '<div>MOI: ' + moi + '</div>' +
+                        '<div>Toe Hang: ' + hang + '</div>' +
+                        '<div>Hosel: ' + hosel + '</div>' +
+                        '<div>LH Available: ' + lh + '</div>';
+                    
+                    tooltip.style.left = '10px';
+                    tooltip.style.top = '10px';
+                    tooltip.style.display = 'block';
+                    
+                    setTimeout(function() {
+                        tooltip.style.display = 'none';
+                    }, 3000);
+                });
+            }
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -159,6 +268,129 @@
         
         <div class="note warning-note">
             <strong>⚠️ Face Rotation Key:</strong> Front CG delivers faster face rotation through impact, while back CG delivers slower face rotation or more right at impact.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📊 Performance Map</h2>
+        <div style="background: white; border-radius: 8px; padding: 15px; overflow-x: auto; position: relative;">
+            <div id="chartTooltip" style="position: absolute; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 4px; font-size: 11px; display: none; z-index: 100; pointer-events: none; max-width: 200px;"></div>
+            <svg viewBox="0 0 400 300" style="width: 100%; max-width: 400px; height: auto;">
+                <defs>
+                    <pattern id="grid" width="40" height="30" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 30" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="320" height="240" x="60" y="20" fill="url(#grid)" />
+                
+                <line x1="60" y1="260" x2="380" y2="260" stroke="#374151" stroke-width="2"/>
+                <line x1="60" y1="260" x2="60" y2="20" stroke="#374151" stroke-width="2"/>
+                
+                <line x1="147" y1="20" x2="147" y2="260" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
+                <line x1="233" y1="20" x2="233" y2="260" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
+                <line x1="60" y1="177" x2="380" y2="177" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
+                <line x1="60" y1="130" x2="380" y2="130" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
+                <line x1="60" y1="80" x2="380" y2="80" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
+                
+                <text x="103" y="15" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="bold">Front CG</text>
+                <text x="190" y="15" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="bold">Mid CG</text>
+                <text x="307" y="15" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="bold">Back CG</text>
+                
+                <!-- Chart points for all putters -->
+                <circle class="chart-point" cx="72" cy="205" r="4" fill="#EF4444" opacity="0.8" data-name="ONE T" data-type="blade" data-cg="0.434" data-moi="4468" data-hang="Mid (48°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="74" cy="201" r="4" fill="#EF4444" opacity="0.8" data-name="Two T" data-type="blade" data-cg="0.437" data-moi="4542" data-hang="Mid (43°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="74" cy="201" r="4" fill="#EF4444" opacity="0.8" data-name="TWO T" data-type="blade" data-cg="0.437" data-moi="4542" data-hang="Mid (45°)" data-hosel="CH" data-lh="Yes"/>
+                <circle class="chart-point" cx="76" cy="195" r="4" fill="#EF4444" opacity="0.8" data-name="#2 CH" data-type="blade" data-cg="0.442" data-moi="4724" data-hang="Mid (44°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="76" cy="198" r="4" fill="#EF4444" opacity="0.8" data-name="#1" data-type="blade" data-cg="0.442" data-moi="4635" data-hang="Mid (45°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="76" cy="198" r="4" fill="#EF4444" opacity="0.8" data-name="#1 LH" data-type="blade" data-cg="0.442" data-moi="4635" data-hang="Mid (47°)" data-hosel="CH" data-lh="Yes"/>
+                <circle class="chart-point" cx="120" cy="192" r="4" fill="#EF4444" opacity="0.8" data-name="One Wide T" data-type="blade" data-cg="0.539" data-moi="4776" data-hang="Mid (35°)" data-hosel="CH" data-lh="Yes"/>
+                <circle class="chart-point" cx="124" cy="166" r="4" fill="#EF4444" opacity="0.8" data-name="One Wide T Cruiser" data-type="blade" data-cg="0.552" data-moi="5219" data-hang="Mid (35°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="138" cy="184" r="4" fill="#EF4444" opacity="0.8" data-name="Double Wide CH" data-type="blade" data-cg="0.617" data-moi="4898" data-hang="Mid (37°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="142" cy="171" r="4" fill="#EF4444" opacity="0.8" data-name="Double Wide Cruiser CH" data-type="blade" data-cg="0.625" data-moi="5141" data-hang="Mid (37°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="145" cy="184" r="4" fill="#F59E0B" opacity="0.8" data-name="Double Wide" data-type="blade" data-cg="0.646" data-moi="4935" data-hang="Minimal (20°)" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="145" cy="184" r="4" fill="#F59E0B" opacity="0.8" data-name="DOUBLE WIDE" data-type="blade" data-cg="0.646" data-moi="4935" data-hang="Minimal (20°)" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="150" cy="54" r="4" fill="#8B5CF6" opacity="0.8" data-name="Double Wide Cruiser" data-type="blade" data-cg="0.669" data-moi="6187" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
+                <circle class="chart-point" cx="152" cy="57" r="4" fill="#8B5CF6" opacity="0.8" data-name="Double Wide CS" data-type="blade" data-cg="0.674" data-moi="6108" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
+                <circle class="chart-point" cx="147" cy="225" r="4" fill="#EF4444" opacity="0.8" data-name="Three T" data-type="mallet" data-cg="0.698" data-moi="4113" data-hang="Mid (43°)" data-hosel="S" data-lh="No"/>
+                <circle class="chart-point" cx="147" cy="225" r="4" fill="#EF4444" opacity="0.8" data-name="THREE T" data-type="mallet" data-cg="0.698" data-moi="4113" data-hang="Mid (44°)" data-hosel="S" data-lh="No"/>
+                <circle class="chart-point" cx="148" cy="244" r="4" fill="#F59E0B" opacity="0.8" data-name="Seven T" data-type="mallet" data-cg="0.700" data-moi="3843" data-hang="Minimal (21°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="148" cy="244" r="4" fill="#F59E0B" opacity="0.8" data-name="SEVEN T CH" data-type="mallet" data-cg="0.700" data-moi="3843" data-hang="Minimal (22°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="156" cy="248" r="4" fill="#10B981" opacity="0.8" data-name="SIX T" data-type="mallet" data-cg="0.732" data-moi="3716" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="175" cy="233" r="4" fill="#10B981" opacity="0.8" data-name="Seven T DB" data-type="mallet" data-cg="0.801" data-moi="3992" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="175" cy="233" r="4" fill="#10B981" opacity="0.8" data-name="SEVEN T DB" data-type="mallet" data-cg="0.801" data-moi="3992" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
+                <circle class="chart-point" cx="180" cy="240" r="4" fill="#EF4444" opacity="0.8" data-name="ROSSIE S" data-type="mallet" data-cg="0.825" data-moi="3941" data-hang="Mid (46°)" data-hosel="S" data-lh="No"/>
+                <circle class="chart-point" cx="188" cy="210" r="4" fill="#10B981" opacity="0.8" data-name="Rossie V T" data-type="mallet" data-cg="0.861" data-moi="4495" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="190" cy="253" r="4" fill="#10B981" opacity="0.8" data-name="Rossie DB" data-type="mallet" data-cg="0.871" data-moi="3635" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="198" cy="213" r="4" fill="#F59E0B" opacity="0.8" data-name="#7 CH" data-type="mallet" data-cg="0.894" data-moi="4438" data-hang="Minimal (10°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="203" cy="209" r="4" fill="#EF4444" opacity="0.8" data-name="#7 S" data-type="mallet" data-cg="0.907" data-moi="4500" data-hang="Mid (40°)" data-hosel="S" data-lh="Yes"/>
+                <circle class="chart-point" cx="203" cy="209" r="4" fill="#EF4444" opacity="0.8" data-name="#7 S RH" data-type="mallet" data-cg="0.907" data-moi="4500" data-hang="Mid (40°)" data-hosel="S" data-lh="No"/>
+                <circle class="chart-point" cx="207" cy="215" r="4" fill="#10B981" opacity="0.8" data-name="#7 DB" data-type="mallet" data-cg="0.928" data-moi="4417" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="217" cy="168" r="4" fill="#10B981" opacity="0.8" data-name="#7 Cruiser DB" data-type="mallet" data-cg="0.967" data-moi="5125" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="219" cy="170" r="4" fill="#10B981" opacity="0.8" data-name="#7 Armlock DB" data-type="mallet" data-cg="0.978" data-moi="5101" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="219" cy="196" r="4" fill="#F59E0B" opacity="0.8" data-name="Jailbird Mini CH" data-type="mallet" data-cg="0.978" data-moi="4640" data-hang="Minimal (24°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="219" cy="188" r="4" fill="#8B5CF6" opacity="0.8" data-name="#7 CS" data-type="mallet" data-cg="0.978" data-moi="4780" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
+                <circle class="chart-point" cx="220" cy="186" r="4" fill="#F59E0B" opacity="0.8" data-name="Jailbird Mini Versa 90" data-type="mallet" data-cg="0.982" data-moi="4809" data-hang="Minimal (24°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="221" cy="188" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird Mini T" data-type="mallet" data-cg="0.985" data-moi="4780" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="221" cy="188" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird Mini T Versa 90" data-type="mallet" data-cg="0.985" data-moi="4780" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="222" cy="175" r="4" fill="#8B5CF6" opacity="0.8" data-name="#7 Cruiser CS" data-type="mallet" data-cg="0.988" data-moi="5008" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
+                <circle class="chart-point" cx="222" cy="181" r="4" fill="#EF4444" opacity="0.8" data-name="Jailbird Mini S" data-type="mallet" data-cg="0.989" data-moi="4847" data-hang="Mid (32°)" data-hosel="S" data-lh="No"/>
+                <circle class="chart-point" cx="223" cy="145" r="4" fill="#10B981" opacity="0.8" data-name="#7 Broomstick CS" data-type="mallet" data-cg="0.997" data-moi="5648" data-hang="Face Balanced" data-hosel="CS" data-lh="No"/>
+                <circle class="chart-point" cx="224" cy="156" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird Versa 90" data-type="mallet" data-cg="1.009" data-moi="5412" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
+                <circle class="chart-point" cx="224" cy="156" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird Cruiser DB" data-type="mallet" data-cg="1.009" data-moi="5412" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
+                <circle class="chart-point" cx="224" cy="193" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird Mini Versa 90 DB" data-type="mallet" data-cg="1.010" data-moi="4735" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="225" cy="193" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird Mini DB" data-type="mallet" data-cg="1.011" data-moi="4739" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="225" cy="135" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird T" data-type="mallet" data-cg="1.018" data-moi="5763" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="225" cy="135" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird Versa 90 T" data-type="mallet" data-cg="1.018" data-moi="5763" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="230" cy="163" r="4" fill="#8B5CF6" opacity="0.8" data-name="Jailbird Cruiser CS" data-type="mallet" data-cg="1.039" data-moi="5266" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
+                <circle class="chart-point" cx="231" cy="174" r="4" fill="#8B5CF6" opacity="0.8" data-name="Jailbird CS" data-type="mallet" data-cg="1.042" data-moi="5028" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
+                <circle class="chart-point" cx="232" cy="237" r="4" fill="#10B981" opacity="0.8" data-name="2-Ball T" data-type="mallet" data-cg="1.045" data-moi="3933" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
+                <circle class="chart-point" cx="236" cy="217" r="4" fill="#F59E0B" opacity="0.8" data-name="2-Ball CH" data-type="mallet" data-cg="1.064" data-moi="4394" data-hang="Minimal (16°)" data-hosel="CH" data-lh="No"/>
+                <circle class="chart-point" cx="240" cy="184" r="4" fill="#EF4444" opacity="0.8" data-name="EIGHT T S" data-type="mallet" data-cg="1.078" data-moi="4937" data-hang="Mid (36°)" data-hosel="S" data-lh="Yes"/>
+                <circle class="chart-point" cx="257" cy="33" r="4" fill="#8B5CF6" opacity="0.8" data-name="Jailbird Broomstick CS" data-type="mallet" data-cg="1.141" data-moi="6784" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
+                <circle class="chart-point" cx="260" cy="221" r="4" fill="#10B981" opacity="0.8" data-name="2-Ball DB" data-type="mallet" data-cg="1.148" data-moi="4253" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
+                <circle class="chart-point" cx="284" cy="174" r="4" fill="#EF4444" opacity="0.8" data-name="24" data-type="mallet" data-cg="1.222" data-moi="5011" data-hang="Mid (33°)" data-hosel="S" data-lh="Yes"/>
+                <circle class="chart-point" cx="290" cy="194" r="4" fill="#10B981" opacity="0.8" data-name="Wing Back" data-type="mallet" data-cg="1.237" data-moi="4689" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                <circle class="chart-point" cx="296" cy="162" r="4" fill="#10B981" opacity="0.8" data-name="2-Ball Jailbird" data-type="mallet" data-cg="1.250" data-moi="5321" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
+                <circle class="chart-point" cx="297" cy="218" r="4" fill="#10B981" opacity="0.8" data-name="2-Ball Jailbird Mini" data-type="mallet" data-cg="1.252" data-moi="4377" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
+                <circle class="chart-point" cx="325" cy="204" r="4" fill="#10B981" opacity="0.8" data-name="ELEVEN T DB" data-type="mallet" data-cg="1.314" data-moi="4584" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
+                
+                <text x="220" y="285" text-anchor="middle" fill="#374151" font-size="12" font-weight="bold">CG Depth (inches)</text>
+                <text x="25" y="140" text-anchor="middle" fill="#374151" font-size="12" font-weight="bold" transform="rotate(-90 25 140)">MOI</text>
+                
+                <text x="60" y="275" text-anchor="middle" fill="#6b7280" font-size="9">0.4</text>
+                <text x="147" y="275" text-anchor="middle" fill="#6b7280" font-size="9">0.7</text>
+                <text x="233" y="275" text-anchor="middle" fill="#6b7280" font-size="9">1.0</text>
+                <text x="320" y="275" text-anchor="middle" fill="#6b7280" font-size="9">1.3</text>
+                
+                <text x="55" y="265" text-anchor="end" fill="#6b7280" font-size="9">3500</text>
+                <text x="55" y="215" text-anchor="end" fill="#6b7280" font-size="9">4000</text>
+                <text x="55" y="135" text-anchor="end" fill="#6b7280" font-size="9">5500</text>
+                <text x="55" y="85" text-anchor="end" fill="#6b7280" font-size="9">6500</text>
+                <text x="55" y="25" text-anchor="end" fill="#6b7280" font-size="9">7000</text>
+            </svg>
+        </div>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; justify-content: center;">
+            <div style="display: flex; align-items: center;">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #10B981; margin-right: 5px;"></div>
+                <span style="font-size: 12px;">Face Balanced</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #F59E0B; margin-right: 5px;"></div>
+                <span style="font-size: 12px;">Minimal</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #EF4444; margin-right: 5px;"></div>
+                <span style="font-size: 12px;">Mid</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #8B5CF6; margin-right: 5px;"></div>
+                <span style="font-size: 12px;">S2S</span>
+            </div>
+        </div>
+        
+        <div class="note">
+            <strong>📍 How to Read:</strong> Each dot represents a putter model positioned by its CG Depth (x-axis) and MOI (y-axis). Colors show toe hang characteristics. <strong>Click any dot</strong> to see detailed specs for that putter model.
         </div>
     </div>
 
@@ -358,6 +590,142 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🏌️ Putter Shaft Reference Guide</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Technical specifications for premium putter shafts. Consider shaft weight and flex characteristics when customizing your putter setup.</p>
+        
+        <div style="overflow-x: auto;">
+            <table class="putter-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Mass (g)</th>
+                        <th>Butt OD</th>
+                        <th>Stiffness</th>
+                        <th>Torque</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>3527I7235</strong></td>
+                        <td>SF PT FORMOSA STRAIGHT IDOD</td>
+                        <td>Stepped Steel</td>
+                        <td>115</td>
+                        <td>0.585</td>
+                        <td>360</td>
+                        <td>1.6</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3539P12</strong></td>
+                        <td>SF PT OD STEPLESS STRAIGHT CRM</td>
+                        <td>Stepless Steel</td>
+                        <td>115</td>
+                        <td>0.600</td>
+                        <td>370</td>
+                        <td>1.6</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3554S72</strong></td>
+                        <td>SF PT LGT WT STEPLESS ST 90C STR SL</td>
+                        <td>90g Steel</td>
+                        <td>99</td>
+                        <td>0.610</td>
+                        <td>350</td>
+                        <td>1.5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3563R72</strong></td>
+                        <td>SF PT LGT WT STEPLESS ST BLK 120C STR SL</td>
+                        <td>120g Steel</td>
+                        <td>118</td>
+                        <td>0.595</td>
+                        <td>340</td>
+                        <td>1.7</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3559H72</strong></td>
+                        <td>SF PT NOBLE STPLSS STEEL STR 140G SL</td>
+                        <td>140g Steel</td>
+                        <td>125</td>
+                        <td>0.585</td>
+                        <td>360</td>
+                        <td>1.6</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3570G72</strong></td>
+                        <td>SF PT STPLSS STEEL STR 180G SL</td>
+                        <td>180g Steel</td>
+                        <td>134</td>
+                        <td>0.605</td>
+                        <td>425</td>
+                        <td>1.3</td>
+                    </tr>
+                    <tr style="background-color: #f0f9ff;">
+                        <td><strong>3543J72</strong></td>
+                        <td>SF PT OD SKLB NWV 70C RED 3.0 STR IDOD</td>
+                        <td>Stroke Lab 3.0 Bi-Matrix</td>
+                        <td>80</td>
+                        <td>0.605</td>
+                        <td>400</td>
+                        <td>3.5</td>
+                    </tr>
+                    <tr style="background-color: #f0f9ff;">
+                        <td><strong>3532I7200</strong></td>
+                        <td>SF PT OD SKLB NOWV RED 2.0 LOW-TRQ STR</td>
+                        <td>Stroke Lab 2.0 Black Swirl Bi-Matrix</td>
+                        <td>118</td>
+                        <td>0.605</td>
+                        <td>380</td>
+                        <td>1.7</td>
+                    </tr>
+                    <tr style="background-color: #f0f9ff;">
+                        <td><strong>3540N92</strong></td>
+                        <td>SF PT OD GR LOW-TORQ 80G RED RED-SWIRL</td>
+                        <td>Stroke Lab Red Swirl Bi-Matrix</td>
+                        <td>83</td>
+                        <td>0.610</td>
+                        <td>390</td>
+                        <td>1.1</td>
+                    </tr>
+                    <tr style="background-color: #f0f9ff;">
+                        <td><strong>3540Q92</strong></td>
+                        <td>SF PT OD GR LOW-TORQ 100G RED BLK-SWIRL</td>
+                        <td>Stroke Lab Black Swirl Bi-Matrix</td>
+                        <td>104</td>
+                        <td>0.610</td>
+                        <td>410</td>
+                        <td>0.9</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px;">
+                    <strong>Steel Shafts</strong><br>
+                    • Traditional feel and feedback<br>
+                    • Higher mass (99-134g)<br>
+                    • Lower torque (1.3-1.7°)<br>
+                    • More consistent performance
+                </div>
+                <div style="background: #f0f9ff; padding: 10px; border-radius: 5px; font-size: 12px;">
+                    <strong>Stroke Lab (Bi-Matrix)</strong><br>
+                    • Multi-material construction<br>
+                    • Optimized weight distribution<br>
+                    • Enhanced stability<br>
+                    • Wide mass range (80-118g)
+                </div>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>💡 Shaft Selection Tips:</strong> Heavier shafts (120g+) provide more stability for aggressive putting strokes, while lighter shafts (80-100g) offer better feel and touch. Lower torque values indicate less twisting during the stroke. Consider your putting style and preference for feedback when selecting shaft specifications.
         </div>
     </div>
 
