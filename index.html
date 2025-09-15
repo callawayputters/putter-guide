@@ -6,12 +6,11 @@
     <title>Golf Putter Selection Guide</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 10px;
             background-color: #f5f5f5;
             font-size: 14px;
-            line-height: 1.4;
         }
         
         .header {
@@ -21,12 +20,6 @@
             text-align: center;
             border-radius: 10px;
             margin-bottom: 15px;
-        }
-        
-        .header h1 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: 600;
         }
         
         .section {
@@ -39,7 +32,6 @@
         
         .section h2 {
             margin-top: 0;
-            margin-bottom: 10px;
             color: #333;
             font-size: 18px;
             border-bottom: 2px solid #eee;
@@ -65,26 +57,6 @@
         .back-cg { border-left: 4px solid #ef4444; }
         .high-moi { background-color: #f0f9ff; }
         
-        .color-legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            font-size: 12px;
-        }
-        
-        .legend-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-        
         .putter-table {
             width: 100%;
             border-collapse: collapse;
@@ -101,17 +73,7 @@
         .putter-table th {
             background-color: #f8f9fa;
             font-weight: 600;
-            position: sticky;
-            top: 0;
         }
-        
-        .putter-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
-        .zone-high-stability { background-color: #dcfce7; }
-        .zone-balanced { background-color: #dbeafe; }
-        .zone-feel { background-color: #fef3c7; }
         
         .quick-filter {
             display: flex;
@@ -127,17 +89,12 @@
             border-radius: 15px;
             font-size: 11px;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .filter-btn:hover {
-            background: #f0f9ff;
         }
         
         .btn-active {
-            background: #3b82f6 !important;
-            color: white !important;
-            border-color: #3b82f6 !important;
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
         }
         
         .note {
@@ -154,41 +111,9 @@
             border-left: 4px solid #f59e0b;
         }
         
-        .chart-tooltip {
-            position: absolute;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 11px;
-            display: none;
-            z-index: 100;
-            pointer-events: none;
-            max-width: 200px;
-        }
-        
-        .chart-point {
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-        
-        .chart-point:hover {
-            stroke: #000;
-            stroke-width: 2;
-        }
-        
         @media (max-width: 480px) {
             .performance-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .putter-table {
-                font-size: 10px;
-            }
-            
-            .putter-table th,
-            .putter-table td {
-                padding: 4px 2px;
             }
         }
     </style>
@@ -196,7 +121,7 @@
 <body>
     <div class="header">
         <h1>🏌️ Putter Selection Guide</h1>
-        <p style="margin: 5px 0 0 0; opacity: 0.9;">Performance-Based Selection Tool</p>
+        <p>Performance-Based Selection Tool</p>
     </div>
 
     <div class="section">
@@ -238,118 +163,6 @@
     </div>
 
     <div class="section">
-        <h2>📊 Performance Map</h2>
-        <div style="background: white; border-radius: 8px; padding: 15px; overflow-x: auto; position: relative;">
-            <div id="chartTooltip" class="chart-tooltip"></div>
-            <svg viewBox="0 0 400 300" style="width: 100%; max-width: 400px; height: auto;">
-                <!-- Grid and axes -->
-                <defs>
-                    <pattern id="grid" width="40" height="30" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 30" fill="none" stroke="#e5e7eb" stroke-width="1"/>
-                    </pattern>
-                </defs>
-                <rect width="320" height="240" x="60" y="20" fill="url(#grid)" />
-                
-                <line x1="60" y1="260" x2="380" y2="260" stroke="#374151" stroke-width="2"/>
-                <line x1="60" y1="260" x2="60" y2="20" stroke="#374151" stroke-width="2"/>
-                
-                <!-- Reference lines -->
-                <line x1="147" y1="20" x2="147" y2="260" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
-                <line x1="233" y1="20" x2="233" y2="260" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
-                <line x1="60" y1="177" x2="380" y2="177" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
-                <line x1="60" y1="130" x2="380" y2="130" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
-                <line x1="60" y1="80" x2="380" y2="80" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
-                
-                <!-- Zone labels -->
-                <text x="103" y="15" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="bold">Front CG</text>
-                <text x="190" y="15" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="bold">Mid CG</text>
-                <text x="307" y="15" text-anchor="middle" fill="#6b7280" font-size="10" font-weight="bold">Back CG</text>
-                
-                <!-- Interactive Data points -->
-                <g id="chartPoints">
-                    <circle class="chart-point" cx="72" cy="205" r="4" fill="#EF4444" opacity="0.8" data-name="ONE T" data-type="blade" data-cg="0.434" data-moi="4468" data-hang="Mid (48°)" data-hosel="CH" data-lh="No"/>
-                    <circle class="chart-point" cx="74" cy="201" r="4" fill="#EF4444" opacity="0.8" data-name="Two T" data-type="blade" data-cg="0.437" data-moi="4542" data-hang="Mid (43°)" data-hosel="CH" data-lh="No"/>
-                    <circle class="chart-point" cx="76" cy="195" r="4" fill="#EF4444" opacity="0.8" data-name="#2 CH" data-type="blade" data-cg="0.442" data-moi="4724" data-hang="Mid (44°)" data-hosel="CH" data-lh="No"/>
-                    <circle class="chart-point" cx="120" cy="192" r="4" fill="#EF4444" opacity="0.8" data-name="One Wide T" data-type="blade" data-cg="0.539" data-moi="4776" data-hang="Mid (35°)" data-hosel="CH" data-lh="Yes"/>
-                    <circle class="chart-point" cx="124" cy="166" r="4" fill="#EF4444" opacity="0.8" data-name="One Wide T Cruiser" data-type="blade" data-cg="0.552" data-moi="5219" data-hang="Mid (35°)" data-hosel="CH" data-lh="No"/>
-                    <circle class="chart-point" cx="138" cy="184" r="4" fill="#EF4444" opacity="0.8" data-name="Double Wide CH" data-type="blade" data-cg="0.617" data-moi="4898" data-hang="Mid (37°)" data-hosel="CH" data-lh="No"/>
-                    <circle class="chart-point" cx="145" cy="184" r="4" fill="#F59E0B" opacity="0.8" data-name="Double Wide" data-type="blade" data-cg="0.646" data-moi="4935" data-hang="Minimal (20°)" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="150" cy="54" r="4" fill="#8B5CF6" opacity="0.8" data-name="Double Wide Cruiser" data-type="blade" data-cg="0.669" data-moi="6187" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
-                    <circle class="chart-point" cx="147" cy="225" r="4" fill="#EF4444" opacity="0.8" data-name="Three T" data-type="mallet" data-cg="0.698" data-moi="4113" data-hang="Mid (43-44°)" data-hosel="S" data-lh="No"/>
-                    <circle class="chart-point" cx="148" cy="244" r="4" fill="#F59E0B" opacity="0.8" data-name="Seven T CH" data-type="mallet" data-cg="0.700" data-moi="3843" data-hang="Minimal (21-22°)" data-hosel="CH" data-lh="No"/>
-                    <circle class="chart-point" cx="156" cy="248" r="4" fill="#10B981" opacity="0.8" data-name="SIX T" data-type="mallet" data-cg="0.732" data-moi="3716" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="175" cy="233" r="4" fill="#10B981" opacity="0.8" data-name="Seven T DB" data-type="mallet" data-cg="0.801" data-moi="3992" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
-                    <circle class="chart-point" cx="180" cy="240" r="4" fill="#EF4444" opacity="0.8" data-name="ROSSIE S" data-type="mallet" data-cg="0.825" data-moi="3941" data-hang="Mid (46°)" data-hosel="S" data-lh="No"/>
-                    <circle class="chart-point" cx="188" cy="210" r="4" fill="#10B981" opacity="0.8" data-name="Rossie V T" data-type="mallet" data-cg="0.861" data-moi="4495" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="190" cy="253" r="4" fill="#10B981" opacity="0.8" data-name="Rossie DB" data-type="mallet" data-cg="0.871" data-moi="3635" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="198" cy="213" r="4" fill="#F59E0B" opacity="0.8" data-name="#7 CH" data-type="mallet" data-cg="0.894" data-moi="4438" data-hang="Minimal (10°)" data-hosel="CH" data-lh="No"/>
-                    <circle class="chart-point" cx="203" cy="209" r="4" fill="#EF4444" opacity="0.8" data-name="#7 S" data-type="mallet" data-cg="0.907" data-moi="4500" data-hang="Mid (40°)" data-hosel="S" data-lh="Yes"/>
-                    <circle class="chart-point" cx="207" cy="215" r="4" fill="#10B981" opacity="0.8" data-name="#7 DB" data-type="mallet" data-cg="0.928" data-moi="4417" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="217" cy="168" r="4" fill="#10B981" opacity="0.8" data-name="#7 Cruiser DB" data-type="mallet" data-cg="0.967" data-moi="5125" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="219" cy="170" r="4" fill="#10B981" opacity="0.8" data-name="#7 Armlock DB" data-type="mallet" data-cg="0.978" data-moi="5101" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="219" cy="196" r="4" fill="#F59E0B" opacity="0.8" data-name="Jailbird Mini CH" data-type="mallet" data-cg="0.978" data-moi="4640" data-hang="Minimal (24°)" data-hosel="CH" data-lh="No"/>
-                    <circle class="chart-point" cx="219" cy="188" r="4" fill="#8B5CF6" opacity="0.8" data-name="#7 CS" data-type="mallet" data-cg="0.978" data-moi="4780" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
-                    <circle class="chart-point" cx="221" cy="188" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird Mini T" data-type="mallet" data-cg="0.985" data-moi="4780" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="222" cy="175" r="4" fill="#8B5CF6" opacity="0.8" data-name="#7 Cruiser CS" data-type="mallet" data-cg="0.988" data-moi="5008" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
-                    <circle class="chart-point" cx="223" cy="145" r="4" fill="#10B981" opacity="0.8" data-name="#7 Broomstick CS" data-type="mallet" data-cg="0.997" data-moi="5648" data-hang="Face Balanced" data-hosel="CS" data-lh="No"/>
-                    <circle class="chart-point" cx="224" cy="156" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird Versa 90" data-type="mallet" data-cg="1.009" data-moi="5412" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
-                    <circle class="chart-point" cx="225" cy="135" r="4" fill="#10B981" opacity="0.8" data-name="Jailbird T" data-type="mallet" data-cg="1.018" data-moi="5763" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="230" cy="163" r="4" fill="#8B5CF6" opacity="0.8" data-name="Jailbird Cruiser CS" data-type="mallet" data-cg="1.039" data-moi="5266" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
-                    <circle class="chart-point" cx="232" cy="237" r="4" fill="#10B981" opacity="0.8" data-name="2-Ball T" data-type="mallet" data-cg="1.045" data-moi="3933" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
-                    <circle class="chart-point" cx="236" cy="217" r="4" fill="#F59E0B" opacity="0.8" data-name="2-Ball CH" data-type="mallet" data-cg="1.064" data-moi="4394" data-hang="Minimal (16°)" data-hosel="CH" data-lh="No"/>
-                    <circle class="chart-point" cx="240" cy="184" r="4" fill="#EF4444" opacity="0.8" data-name="EIGHT T S" data-type="mallet" data-cg="1.078" data-moi="4937" data-hang="Mid (36°)" data-hosel="S" data-lh="Yes"/>
-                    <circle class="chart-point" cx="257" cy="33" r="4" fill="#8B5CF6" opacity="0.8" data-name="Jailbird Broomstick CS" data-type="mallet" data-cg="1.141" data-moi="6784" data-hang="S2S (90°)" data-hosel="CS" data-lh="No"/>
-                    <circle class="chart-point" cx="260" cy="221" r="4" fill="#10B981" opacity="0.8" data-name="2-Ball DB" data-type="mallet" data-cg="1.148" data-moi="4253" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
-                    <circle class="chart-point" cx="284" cy="174" r="4" fill="#EF4444" opacity="0.8" data-name="24" data-type="mallet" data-cg="1.222" data-moi="5011" data-hang="Mid (33°)" data-hosel="S" data-lh="Yes"/>
-                    <circle class="chart-point" cx="290" cy="194" r="4" fill="#10B981" opacity="0.8" data-name="Wing Back" data-type="mallet" data-cg="1.237" data-moi="4689" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                    <circle class="chart-point" cx="296" cy="162" r="4" fill="#10B981" opacity="0.8" data-name="2-Ball Jailbird" data-type="mallet" data-cg="1.250" data-moi="5321" data-hang="Face Balanced" data-hosel="DB" data-lh="Yes"/>
-                    <circle class="chart-point" cx="325" cy="204" r="4" fill="#10B981" opacity="0.8" data-name="ELEVEN T DB" data-type="mallet" data-cg="1.314" data-moi="4584" data-hang="Face Balanced" data-hosel="DB" data-lh="No"/>
-                </g>
-                
-                <!-- Axis labels -->
-                <text x="220" y="285" text-anchor="middle" fill="#374151" font-size="12" font-weight="bold">CG Depth (inches)</text>
-                <text x="25" y="140" text-anchor="middle" fill="#374151" font-size="12" font-weight="bold" transform="rotate(-90 25 140)">MOI</text>
-                
-                <!-- Tick labels -->
-                <text x="60" y="275" text-anchor="middle" fill="#6b7280" font-size="9">0.4</text>
-                <text x="147" y="275" text-anchor="middle" fill="#6b7280" font-size="9">0.7</text>
-                <text x="233" y="275" text-anchor="middle" fill="#6b7280" font-size="9">1.0</text>
-                <text x="320" y="275" text-anchor="middle" fill="#6b7280" font-size="9">1.3</text>
-                
-                <text x="55" y="265" text-anchor="end" fill="#6b7280" font-size="9">3500</text>
-                <text x="55" y="215" text-anchor="end" fill="#6b7280" font-size="9">4000</text>
-                <text x="55" y="182" text-anchor="end" fill="#6b7280" font-size="9">4500</text>
-                <text x="55" y="135" text-anchor="end" fill="#6b7280" font-size="9">5500</text>
-                <text x="55" y="85" text-anchor="end" fill="#6b7280" font-size="9">6500</text>
-                <text x="55" y="25" text-anchor="end" fill="#6b7280" font-size="9">7000</text>
-            </svg>
-        </div>
-        
-        <div class="color-legend" style="margin-top: 10px;">
-            <div class="legend-item">
-                <div class="legend-color" style="background-color: #10B981;"></div>
-                <span>Face Balanced</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background-color: #F59E0B;"></div>
-                <span>Minimal</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background-color: #EF4444;"></div>
-                <span>Mid</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background-color: #8B5CF6;"></div>
-                <span>S2S</span>
-            </div>
-        </div>
-        
-        <div class="note">
-            <strong>📍 How to Read:</strong> Each dot represents a putter model positioned by its CG Depth (x-axis) and MOI (y-axis). Colors show toe hang characteristics. <strong>Click or hover over any dot</strong> to see detailed specs for that putter model.
-        </div>
-    </div>
-
-    <div class="section">
         <h2>📊 Complete Putter Database</h2>
         
         <div class="quick-filter">
@@ -362,7 +175,7 @@
         </div>
         
         <div style="overflow-x: auto;">
-            <table class="putter-table" id="putterTable">
+            <table class="putter-table">
                 <thead>
                     <tr>
                         <th>Model</th>
@@ -375,293 +188,173 @@
                     </tr>
                 </thead>
                 <tbody id="putterTableBody">
-                    <tr data-type="blade" data-toehang="mid" data-moi="4468" data-lh="no" class="zone-feel">
-                        <td><strong>ONE T</strong></td>
-                        <td>Blade</td>
-                        <td>0.434</td>
-                        <td>4468</td>
-                        <td>Mid (48°)</td>
-                        <td>CH</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4468" data-lh="no">
+                        <td><strong>ONE T</strong></td><td>Blade</td><td>0.434</td><td>4468</td><td>Mid (48°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="blade" data-toehang="minimal" data-moi="4935" data-lh="no" class="zone-balanced">
-                        <td><strong>Double Wide</strong></td>
-                        <td>Blade</td>
-                        <td>0.646</td>
-                        <td>4935</td>
-                        <td>Minimal (20°)</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4542" data-lh="no">
+                        <td><strong>Two T</strong></td><td>Blade</td><td>0.437</td><td>4542</td><td>Mid (43°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="blade" data-toehang="s2s" data-moi="6187" data-lh="no" class="zone-high-stability">
-                        <td><strong>Double Wide Cruiser</strong></td>
-                        <td>Blade</td>
-                        <td>0.669</td>
-                        <td>6187</td>
-                        <td>S2S (90°)</td>
-                        <td>CS</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4542" data-lh="yes">
+                        <td><strong>TWO T</strong></td><td>Blade</td><td>0.437</td><td>4542</td><td>Mid (45°)</td><td>CH</td><td>✅</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="mid" data-moi="4113" data-lh="no" class="zone-balanced">
-                        <td><strong>Three T</strong></td>
-                        <td>Mallet</td>
-                        <td>0.698</td>
-                        <td>4113</td>
-                        <td>Mid (43-44°)</td>
-                        <td>S</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4724" data-lh="no">
+                        <td><strong>#2 CH</strong></td><td>Blade</td><td>0.442</td><td>4724</td><td>Mid (44°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="minimal" data-moi="3843" data-lh="no" class="zone-balanced">
-                        <td><strong>Seven T CH</strong></td>
-                        <td>Mallet</td>
-                        <td>0.700</td>
-                        <td>3843</td>
-                        <td>Minimal (21-22°)</td>
-                        <td>CH</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4635" data-lh="no">
+                        <td><strong>#1</strong></td><td>Blade</td><td>0.442</td><td>4635</td><td>Mid (45°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3716" data-lh="no" class="zone-balanced">
-                        <td><strong>SIX T</strong></td>
-                        <td>Mallet</td>
-                        <td>0.732</td>
-                        <td>3716</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4635" data-lh="yes">
+                        <td><strong>#1 LH</strong></td><td>Blade</td><td>0.442</td><td>4635</td><td>Mid (47°)</td><td>CH</td><td>✅</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3992" data-lh="yes" class="zone-balanced">
-                        <td><strong>Seven T DB</strong></td>
-                        <td>Mallet</td>
-                        <td>0.801</td>
-                        <td>3992</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>✅</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4776" data-lh="yes">
+                        <td><strong>One Wide T</strong></td><td>Blade</td><td>0.539</td><td>4776</td><td>Mid (35°)</td><td>CH</td><td>✅</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="mid" data-moi="3941" data-lh="no" class="zone-balanced">
-                        <td><strong>ROSSIE S</strong></td>
-                        <td>Mallet</td>
-                        <td>0.825</td>
-                        <td>3941</td>
-                        <td>Mid (46°)</td>
-                        <td>S</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="5219" data-lh="no">
+                        <td><strong>One Wide T Cruiser</strong></td><td>Blade</td><td>0.552</td><td>5219</td><td>Mid (35°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4495" data-lh="no" class="zone-balanced">
-                        <td><strong>Rossie V T</strong></td>
-                        <td>Mallet</td>
-                        <td>0.861</td>
-                        <td>4495</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="4898" data-lh="no">
+                        <td><strong>Double Wide CH</strong></td><td>Blade</td><td>0.617</td><td>4898</td><td>Mid (37°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3635" data-lh="no" class="zone-balanced">
-                        <td><strong>Rossie DB</strong></td>
-                        <td>Mallet</td>
-                        <td>0.871</td>
-                        <td>3635</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="mid" data-moi="5141" data-lh="no">
+                        <td><strong>Double Wide Cruiser CH</strong></td><td>Blade</td><td>0.625</td><td>5141</td><td>Mid (37°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="minimal" data-moi="4438" data-lh="no" class="zone-balanced">
-                        <td><strong>#7 CH</strong></td>
-                        <td>Mallet</td>
-                        <td>0.894</td>
-                        <td>4438</td>
-                        <td>Minimal (10°)</td>
-                        <td>CH</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="minimal" data-moi="4935" data-lh="no">
+                        <td><strong>Double Wide</strong></td><td>Blade</td><td>0.646</td><td>4935</td><td>Minimal (20°)</td><td>DB</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="mid" data-moi="4500" data-lh="yes" class="zone-balanced">
-                        <td><strong>#7 S</strong></td>
-                        <td>Mallet</td>
-                        <td>0.907</td>
-                        <td>4500</td>
-                        <td>Mid (40°)</td>
-                        <td>S</td>
-                        <td>✅</td>
+                    <tr data-type="blade" data-toehang="minimal" data-moi="4935" data-lh="no">
+                        <td><strong>DOUBLE WIDE</strong></td><td>Blade</td><td>0.646</td><td>4935</td><td>Minimal (20°)</td><td>DB</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4417" data-lh="no" class="zone-balanced">
-                        <td><strong>#7 DB</strong></td>
-                        <td>Mallet</td>
-                        <td>0.928</td>
-                        <td>4417</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="s2s" data-moi="6187" data-lh="no">
+                        <td><strong>Double Wide Cruiser</strong></td><td>Blade</td><td>0.669</td><td>6187</td><td>S2S (90°)</td><td>CS</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5125" data-lh="no" class="zone-high-stability">
-                        <td><strong>#7 Cruiser DB</strong></td>
-                        <td>Mallet</td>
-                        <td>0.967</td>
-                        <td>5125</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="blade" data-toehang="s2s" data-moi="6108" data-lh="no">
+                        <td><strong>Double Wide CS</strong></td><td>Blade</td><td>0.674</td><td>6108</td><td>S2S (90°)</td><td>CS</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5101" data-lh="no" class="zone-high-stability">
-                        <td><strong>#7 Armlock DB</strong></td>
-                        <td>Mallet</td>
-                        <td>0.978</td>
-                        <td>5101</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4113" data-lh="no">
+                        <td><strong>Three T</strong></td><td>Mallet</td><td>0.698</td><td>4113</td><td>Mid (43°)</td><td>S</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="minimal" data-moi="4640" data-lh="no" class="zone-balanced">
-                        <td><strong>Jailbird Mini CH</strong></td>
-                        <td>Mallet</td>
-                        <td>0.978</td>
-                        <td>4640</td>
-                        <td>Minimal (24°)</td>
-                        <td>CH</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4113" data-lh="no">
+                        <td><strong>THREE T</strong></td><td>Mallet</td><td>0.698</td><td>4113</td><td>Mid (44°)</td><td>S</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="s2s" data-moi="4780" data-lh="no" class="zone-balanced">
-                        <td><strong>#7 CS</strong></td>
-                        <td>Mallet</td>
-                        <td>0.978</td>
-                        <td>4780</td>
-                        <td>S2S (90°)</td>
-                        <td>CS</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="3843" data-lh="no">
+                        <td><strong>Seven T</strong></td><td>Mallet</td><td>0.700</td><td>3843</td><td>Minimal (21°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4780" data-lh="no" class="zone-balanced">
-                        <td><strong>Jailbird Mini T</strong></td>
-                        <td>Mallet</td>
-                        <td>0.985</td>
-                        <td>4780</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="3843" data-lh="no">
+                        <td><strong>SEVEN T CH</strong></td><td>Mallet</td><td>0.700</td><td>3843</td><td>Minimal (22°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="s2s" data-moi="5008" data-lh="no" class="zone-high-stability">
-                        <td><strong>#7 Cruiser CS</strong></td>
-                        <td>Mallet</td>
-                        <td>0.988</td>
-                        <td>5008</td>
-                        <td>S2S (90°)</td>
-                        <td>CS</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3716" data-lh="no">
+                        <td><strong>SIX T</strong></td><td>Mallet</td><td>0.732</td><td>3716</td><td>Face Balanced</td><td>DB</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5648" data-lh="no" class="zone-high-stability">
-                        <td><strong>#7 Broomstick CS</strong></td>
-                        <td>Mallet</td>
-                        <td>0.997</td>
-                        <td>5648</td>
-                        <td>Face Balanced</td>
-                        <td>CS</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3992" data-lh="no">
+                        <td><strong>Seven T DB</strong></td><td>Mallet</td><td>0.801</td><td>3992</td><td>Face Balanced</td><td>DB</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5412" data-lh="yes" class="zone-high-stability">
-                        <td><strong>Jailbird Versa 90</strong></td>
-                        <td>Mallet</td>
-                        <td>1.009</td>
-                        <td>5412</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>✅</td>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3992" data-lh="yes">
+                        <td><strong>SEVEN T DB</strong></td><td>Mallet</td><td>0.801</td><td>3992</td><td>Face Balanced</td><td>DB</td><td>✅</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5763" data-lh="no" class="zone-high-stability">
-                        <td><strong>Jailbird T</strong></td>
-                        <td>Mallet</td>
-                        <td>1.018</td>
-                        <td>5763</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="3941" data-lh="no">
+                        <td><strong>ROSSIE S</strong></td><td>Mallet</td><td>0.825</td><td>3941</td><td>Mid (46°)</td><td>S</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="s2s" data-moi="5266" data-lh="no" class="zone-high-stability">
-                        <td><strong>Jailbird Cruiser CS</strong></td>
-                        <td>Mallet</td>
-                        <td>1.039</td>
-                        <td>5266</td>
-                        <td>S2S (90°)</td>
-                        <td>CS</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4495" data-lh="no">
+                        <td><strong>Rossie V T</strong></td><td>Mallet</td><td>0.861</td><td>4495</td><td>Face Balanced</td><td>DB</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3933" data-lh="yes" class="zone-high-stability">
-                        <td><strong>2-Ball T</strong></td>
-                        <td>Mallet</td>
-                        <td>1.045</td>
-                        <td>3933</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>✅</td>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3635" data-lh="no">
+                        <td><strong>Rossie DB</strong></td><td>Mallet</td><td>0.871</td><td>3635</td><td>Face Balanced</td><td>DB</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="minimal" data-moi="4394" data-lh="no" class="zone-high-stability">
-                        <td><strong>2-Ball CH</strong></td>
-                        <td>Mallet</td>
-                        <td>1.064</td>
-                        <td>4394</td>
-                        <td>Minimal (16°)</td>
-                        <td>CH</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="4438" data-lh="no">
+                        <td><strong>#7 CH</strong></td><td>Mallet</td><td>0.894</td><td>4438</td><td>Minimal (10°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="mid" data-moi="4937" data-lh="yes" class="zone-high-stability">
-                        <td><strong>EIGHT T S</strong></td>
-                        <td>Mallet</td>
-                        <td>1.078</td>
-                        <td>4937</td>
-                        <td>Mid (36°)</td>
-                        <td>S</td>
-                        <td>✅</td>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4500" data-lh="yes">
+                        <td><strong>#7 S</strong></td><td>Mallet</td><td>0.907</td><td>4500</td><td>Mid (40°)</td><td>S</td><td>✅</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="s2s" data-moi="6784" data-lh="no" class="zone-high-stability">
-                        <td><strong>Jailbird Broomstick CS</strong></td>
-                        <td>Mallet</td>
-                        <td>1.141</td>
-                        <td>6784</td>
-                        <td>S2S (90°)</td>
-                        <td>CS</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4500" data-lh="no">
+                        <td><strong>#7 S RH</strong></td><td>Mallet</td><td>0.907</td><td>4500</td><td>Mid (40°)</td><td>S</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4253" data-lh="yes" class="zone-high-stability">
-                        <td><strong>2-Ball DB</strong></td>
-                        <td>Mallet</td>
-                        <td>1.148</td>
-                        <td>4253</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>✅</td>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4417" data-lh="no">
+                        <td><strong>#7 DB</strong></td><td>Mallet</td><td>0.928</td><td>4417</td><td>Face Balanced</td><td>DB</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="mid" data-moi="5011" data-lh="yes" class="zone-high-stability">
-                        <td><strong>24</strong></td>
-                        <td>Mallet</td>
-                        <td>1.222</td>
-                        <td>5011</td>
-                        <td>Mid (33°)</td>
-                        <td>S</td>
-                        <td>✅</td>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5125" data-lh="no">
+                        <td><strong>#7 Cruiser DB</strong></td><td>Mallet</td><td>0.967</td><td>5125</td><td>Face Balanced</td><td>DB</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4689" data-lh="no" class="zone-high-stability">
-                        <td><strong>Wing Back</strong></td>
-                        <td>Mallet</td>
-                        <td>1.237</td>
-                        <td>4689</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5101" data-lh="no">
+                        <td><strong>#7 Armlock DB</strong></td><td>Mallet</td><td>0.978</td><td>5101</td><td>Face Balanced</td><td>DB</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5321" data-lh="yes" class="zone-high-stability">
-                        <td><strong>2-Ball Jailbird</strong></td>
-                        <td>Mallet</td>
-                        <td>1.250</td>
-                        <td>5321</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>✅</td>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="4640" data-lh="no">
+                        <td><strong>Jailbird Mini CH</strong></td><td>Mallet</td><td>0.978</td><td>4640</td><td>Minimal (24°)</td><td>CH</td><td>❌</td>
                     </tr>
-                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4584" data-lh="no" class="zone-high-stability">
-                        <td><strong>ELEVEN T DB</strong></td>
-                        <td>Mallet</td>
-                        <td>1.314</td>
-                        <td>4584</td>
-                        <td>Face Balanced</td>
-                        <td>DB</td>
-                        <td>❌</td>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="4780" data-lh="no">
+                        <td><strong>#7 CS</strong></td><td>Mallet</td><td>0.978</td><td>4780</td><td>S2S (90°)</td><td>CS</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="4809" data-lh="no">
+                        <td><strong>Jailbird Mini Versa 90</strong></td><td>Mallet</td><td>0.982</td><td>4809</td><td>Minimal (24°)</td><td>CH</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4780" data-lh="no">
+                        <td><strong>Jailbird Mini T</strong></td><td>Mallet</td><td>0.985</td><td>4780</td><td>Face Balanced</td><td>DB</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4780" data-lh="no">
+                        <td><strong>Jailbird Mini T Versa 90</strong></td><td>Mallet</td><td>0.985</td><td>4780</td><td>Face Balanced</td><td>DB</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="5008" data-lh="no">
+                        <td><strong>#7 Cruiser CS</strong></td><td>Mallet</td><td>0.988</td><td>5008</td><td>S2S (90°)</td><td>CS</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4847" data-lh="no">
+                        <td><strong>Jailbird Mini S</strong></td><td>Mallet</td><td>0.989</td><td>4847</td><td>Mid (32°)</td><td>S</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5648" data-lh="no">
+                        <td><strong>#7 Broomstick CS</strong></td><td>Mallet</td><td>0.997</td><td>5648</td><td>Face Balanced</td><td>CS</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5412" data-lh="yes">
+                        <td><strong>Jailbird Versa 90</strong></td><td>Mallet</td><td>1.009</td><td>5412</td><td>Face Balanced</td><td>DB</td><td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5412" data-lh="yes">
+                        <td><strong>Jailbird Cruiser DB</strong></td><td>Mallet</td><td>1.009</td><td>5412</td><td>Face Balanced</td><td>DB</td><td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4735" data-lh="no">
+                        <td><strong>Jailbird Mini Versa 90 DB</strong></td><td>Mallet</td><td>1.010</td><td>4735</td><td>Face Balanced</td><td>DB</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4739" data-lh="no">
+                        <td><strong>Jailbird Mini DB</strong></td><td>Mallet</td><td>1.011</td><td>4739</td><td>Face Balanced</td><td>DB</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5763" data-lh="no">
+                        <td><strong>Jailbird T</strong></td><td>Mallet</td><td>1.018</td><td>5763</td><td>Face Balanced</td><td>DB</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5763" data-lh="no">
+                        <td><strong>Jailbird Versa 90 T</strong></td><td>Mallet</td><td>1.018</td><td>5763</td><td>Face Balanced</td><td>DB</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="5266" data-lh="no">
+                        <td><strong>Jailbird Cruiser CS</strong></td><td>Mallet</td><td>1.039</td><td>5266</td><td>S2S (90°)</td><td>CS</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="5028" data-lh="no">
+                        <td><strong>Jailbird CS</strong></td><td>Mallet</td><td>1.042</td><td>5028</td><td>S2S (90°)</td><td>CS</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="3933" data-lh="yes">
+                        <td><strong>2-Ball T</strong></td><td>Mallet</td><td>1.045</td><td>3933</td><td>Face Balanced</td><td>DB</td><td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="minimal" data-moi="4394" data-lh="no">
+                        <td><strong>2-Ball CH</strong></td><td>Mallet</td><td>1.064</td><td>4394</td><td>Minimal (16°)</td><td>CH</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="4937" data-lh="yes">
+                        <td><strong>EIGHT T S</strong></td><td>Mallet</td><td>1.078</td><td>4937</td><td>Mid (36°)</td><td>S</td><td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="s2s" data-moi="6784" data-lh="no">
+                        <td><strong>Jailbird Broomstick CS</strong></td><td>Mallet</td><td>1.141</td><td>6784</td><td>S2S (90°)</td><td>CS</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4253" data-lh="yes">
+                        <td><strong>2-Ball DB</strong></td><td>Mallet</td><td>1.148</td><td>4253</td><td>Face Balanced</td><td>DB</td><td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="mid" data-moi="5011" data-lh="yes">
+                        <td><strong>24</strong></td><td>Mallet</td><td>1.222</td><td>5011</td><td>Mid (33°)</td><td>S</td><td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4689" data-lh="no">
+                        <td><strong>Wing Back</strong></td><td>Mallet</td><td>1.237</td><td>4689</td><td>Face Balanced</td><td>DB</td><td>❌</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="5321" data-lh="yes">
+                        <td><strong>2-Ball Jailbird</strong></td><td>Mallet</td><td>1.250</td><td>5321</td><td>Face Balanced</td><td>DB</td><td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4377" data-lh="yes">
+                        <td><strong>2-Ball Jailbird Mini</strong></td><td>Mallet</td><td>1.252</td><td>4377</td><td>Face Balanced</td><td>DB</td><td>✅</td>
+                    </tr>
+                    <tr data-type="mallet" data-toehang="face-balanced" data-moi="4584" data-lh="no">
+                        <td><strong>ELEVEN T DB</strong></td><td>Mallet</td><td>1.314</td><td>4584</td><td>Face Balanced</td><td>DB</td><td>❌</td>
                     </tr>
                 </tbody>
             </table>
@@ -670,25 +363,23 @@
 
     <div class="section">
         <h2>📱 How to Use This Guide</h2>
-        <ol style="margin: 0; padding-left: 20px; font-size: 13px;">
+        <ol style="font-size: 13px;">
             <li><strong>Identify your stroke type</strong> - Straight vs. arc putting motion</li>
             <li><strong>Determine forgiveness needs</strong> - Consistent ball striker vs. needs help</li>
             <li><strong>Use the performance zones</strong> - Front CG for feel, Back CG for stability</li>
-            <li><strong>Filter the table and chart</strong> - Use buttons above to narrow choices</li>
+            <li><strong>Filter the table</strong> - Use buttons above to narrow choices</li>
             <li><strong>Check left-handed availability</strong> - Look for ✅ in LH column</li>
         </ol>
     </div>
 
     <script>
         function applyFilter(filterType) {
-            // Update button states
             var buttons = document.querySelectorAll('.filter-btn');
             for (var i = 0; i < buttons.length; i++) {
                 buttons[i].className = 'filter-btn';
             }
             event.target.className = 'filter-btn btn-active';
             
-            // Filter table rows
             var rows = document.querySelectorAll('#putterTableBody tr');
             for (var i = 0; i < rows.length; i++) {
                 var row = rows[i];
@@ -717,122 +408,7 @@
                 
                 row.style.display = show ? '' : 'none';
             }
-            
-            // Filter chart points
-            var chartPoints = document.querySelectorAll('.chart-point');
-            for (var i = 0; i < chartPoints.length; i++) {
-                var point = chartPoints[i];
-                var show = false;
-                
-                switch(filterType) {
-                    case 'all':
-                        show = true;
-                        break;
-                    case 'blade':
-                        show = point.getAttribute('data-type') === 'blade';
-                        break;
-                    case 'mallet':
-                        show = point.getAttribute('data-type') === 'mallet';
-                        break;
-                    case 'face-balanced':
-                        show = point.getAttribute('data-hang') && point.getAttribute('data-hang').toLowerCase().indexOf('face balanced') !== -1;
-                        break;
-                    case 'high-moi':
-                        show = parseInt(point.getAttribute('data-moi')) >= 5000;
-                        break;
-                    case 'left-handed':
-                        show = point.getAttribute('data-lh') === 'Yes';
-                        break;
-                }
-                
-                if (show) {
-                    point.style.opacity = '0.8';
-                    point.style.display = 'block';
-                } else {
-                    point.style.opacity = '0.1';
-                    point.style.display = 'block';
-                }
-            }
         }
-        
-        // Add tooltip functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            var chartPoints = document.querySelectorAll('.chart-point');
-            var tooltip = document.getElementById('chartTooltip');
-            
-            for (var i = 0; i < chartPoints.length; i++) {
-                chartPoints[i].addEventListener('click', function(e) {
-                    var data = this.dataset || this.attributes;
-                    var name = this.getAttribute('data-name');
-                    var type = this.getAttribute('data-type');
-                    var cg = this.getAttribute('data-cg');
-                    var moi = this.getAttribute('data-moi');
-                    var hang = this.getAttribute('data-hang');
-                    var hosel = this.getAttribute('data-hosel');
-                    var lh = this.getAttribute('data-lh');
-                    
-                    tooltip.innerHTML = 
-                        '<div style="font-weight: bold; margin-bottom: 4px;">' + name + '</div>' +
-                        '<div>Type: ' + type + '</div>' +
-                        '<div>CG Depth: ' + cg + '</div>' +
-                        '<div>MOI: ' + moi + '</div>' +
-                        '<div>Toe Hang: ' + hang + '</div>' +
-                        '<div>Hosel: ' + hosel + '</div>' +
-                        '<div>LH Available: ' + lh + '</div>';
-                    
-                    tooltip.style.left = '10px';
-                    tooltip.style.top = '10px';
-                    tooltip.style.display = 'block';
-                    
-                    setTimeout(function() {
-                        tooltip.style.display = 'none';
-                    }, 3000);
-                });
-            }
-        });
     </script>
 </body>
 </html>
-                    <tr data-type="blade" data-toehang="mid" data-moi="4542" data-lh="no" class="zone-feel">
-                        <td><strong>Two T</strong></td>
-                        <td>Blade</td>
-                        <td>0.437</td>
-                        <td>4542</td>
-                        <td>Mid (43°)</td>
-                        <td>CH</td>
-                        <td>❌</td>
-                    </tr>
-                    <tr data-type="blade" data-toehang="mid" data-moi="4724" data-lh="no" class="zone-feel">
-                        <td><strong>#2 CH</strong></td>
-                        <td>Blade</td>
-                        <td>0.442</td>
-                        <td>4724</td>
-                        <td>Mid (44°)</td>
-                        <td>CH</td>
-                        <td>❌</td>
-                    </tr>
-                    <tr data-type="blade" data-toehang="mid" data-moi="4776" data-lh="yes" class="zone-feel">
-                        <td><strong>One Wide T</strong></td>
-                        <td>Blade</td>
-                        <td>0.539</td>
-                        <td>4776</td>
-                        <td>Mid (35°)</td>
-                        <td>CH</td>
-                        <td>✅</td>
-                    </tr>
-                    <tr data-type="blade" data-toehang="mid" data-moi="5219" data-lh="no" class="zone-balanced">
-                        <td><strong>One Wide T Cruiser</strong></td>
-                        <td>Blade</td>
-                        <td>0.552</td>
-                        <td>5219</td>
-                        <td>Mid (35°)</td>
-                        <td>CH</td>
-                        <td>❌</td>
-                    </tr>
-                    <tr data-type="blade" data-toehang="mid" data-moi="4898" data-lh="no" class="zone-balanced">
-                        <td><strong>Double Wide CH</strong></td>
-                        <td>Blade</td>
-                        <td>0.617</td>
-                        <td>4898</td>
-                        <td>Mid (37°)</td>
-                        <td>CH</td>
